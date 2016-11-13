@@ -8,6 +8,13 @@ use File;
 class AppServiceProvider extends ServiceProvider{
 
     /**
+     * The application instance.
+     *
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    public $app;
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -57,8 +64,6 @@ class AppServiceProvider extends ServiceProvider{
      */
     public function loadPackages(){
         $path = base_path('src');
-
-        new \Example\Providers\AppServiceProvider();
         
         $packages = collect();
 
@@ -71,21 +76,78 @@ class AppServiceProvider extends ServiceProvider{
 
             if(File::exists($file)){
                 require $file;
-                echo $class;
-                echo "<br>";
-                $class = new $class($this -> app,$directory,$name);
-                $class -> register();
+                $class = new $class($this,$directory,$name);
+                $class -> boot();
 
                 $packages[] = $class;
             }
         }
 
 
-
         $packages -> map(function($package){
-            $package -> boot();
+            $package -> register();
         });
 
 
+    }
+
+
+    /**
+     * Merge the given configuration with the existing configuration.
+     *
+     * @param  string  $path
+     * @param  string  $key
+     * @return void
+     */
+    public function mergeConfigFrom($path, $key)
+    {
+        return parent::mergeConfigFrom($path, $key);
+    }
+
+    /**
+     * Register a view file namespace.
+     *
+     * @param  string  $path
+     * @param  string  $namespace
+     * @return void
+     */
+    public function loadViewsFrom($path, $namespace)
+    {
+        return parent::loadViewsFrom($path, $namespace);
+    }
+
+    /**
+     * Register a translation file namespace.
+     *
+     * @param  string  $path
+     * @param  string  $namespace
+     * @return void
+     */
+    public function loadTranslationsFrom($path, $namespace)
+    {
+        return parent::loadTranslationsFrom($path, $namespace);
+    }
+
+    /**
+     * Register a database migration path.
+     *
+     * @param  array|string  $paths
+     * @return void
+     */
+    public function loadMigrationsFrom($paths)
+    {
+        return parent::loadMigrationsFrom($paths);
+    }
+
+    /**
+     * Register paths to be published by the publish command.
+     *
+     * @param  array  $paths
+     * @param  string  $group
+     * @return void
+     */
+    public function publishes(array $paths, $group = null)
+    {
+        return parent::publishes($path, $group);
     }
 }

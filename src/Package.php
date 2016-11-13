@@ -83,7 +83,7 @@ class Package{
             $this -> getServiceProvider() -> app -> register($class);
         });
 
-        $this -> loadFiles('Commands/*','Commands\\',function($files,$classes){
+        $this -> loadFiles('Console/Commands/*','Console\\Commands\\',function($files,$classes){
             $this -> getServiceProvider() -> commands($classes);
         });
 
@@ -101,8 +101,8 @@ class Package{
      */
     public function loadFile($directory,$namespace,$closure){
 
-        $providers = $this -> getFiles($directory);
-        $providers -> map(function($file) use($closure,$namespace){
+        $files = $this -> getFiles($directory);
+        $files -> map(function($file) use($closure,$namespace){
             $class = $this -> getClassByBasename(basename($file),$namespace);
             $closure($file,$class);
         });
@@ -119,12 +119,11 @@ class Package{
      */
     public function loadFiles($directory,$namespace,$closure){
 
-        $files = collect();
-        $classes = collect();
+        $files = [];
+        $classes = [];
 
-        $providers = $this -> getFiles($directory);
-
-        $providers -> map(function($file) use($closure,$namespace){
+        $files = $this -> getFiles($directory);
+        $files -> map(function($file) use($closure,$namespace,&$classes,&$files){
             $class = $this -> getClassByBasename(basename($file),$namespace);
             $classes[] = $class;
             $files[] = $file;
@@ -192,7 +191,7 @@ class Package{
                     symlink($from,$to);
 
                 }catch(\Exception $e){
-                    throw new \Exception($e);
+                    throw new \Exception("Cannot create symlink from $from to $to");
                 }
             }
         }

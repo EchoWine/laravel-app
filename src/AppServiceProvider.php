@@ -3,6 +3,7 @@
 namespace EchoWine\Laravel\App;
 
 use Illuminate\Support\ServiceProvider;
+use EchoWine\Laravel\App\Commands as Commands;
 use File;
 
 class AppServiceProvider extends ServiceProvider{
@@ -22,6 +23,8 @@ class AppServiceProvider extends ServiceProvider{
     public function register(){
 
         $this -> makePath();
+
+        $this -> commands([Commands\Generate::class]);
 
         $this -> loadPackages();
     }

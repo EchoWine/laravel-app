@@ -17,7 +17,7 @@ A simple loader that permits to split the project in multiple parts or even crea
         }
     },
 }
-
+```
 - Add the service provider to the `providers` array in `config/app.php`
 
 ```php

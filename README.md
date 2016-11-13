@@ -38,5 +38,5 @@ return view('Example::index');
 ### Assets
 
 ```php
-{{asset('src/Example/welcome/main.css')}}
+{{asset('src/Example/assets/welcome/main.css')}}
 ```

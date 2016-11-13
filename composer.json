@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4" : {
-            "EchoWine\\Laravel\\App" : "src/"
+            "EchoWine\\Laravel\\App\\" : "src/"
         }
     }
 }

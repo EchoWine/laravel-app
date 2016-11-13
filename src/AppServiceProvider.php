@@ -57,8 +57,6 @@ class AppServiceProvider extends ServiceProvider{
      */
     public function loadPackages(){
         $path = base_path('src');
-
-        new \Example\Providers\AppServiceProvider();
         
         $packages = collect();
 
@@ -71,8 +69,6 @@ class AppServiceProvider extends ServiceProvider{
 
             if(File::exists($file)){
                 require $file;
-                echo $class;
-                echo "<br>";
                 $class = new $class($this -> app,$directory,$name);
                 $class -> register();
 

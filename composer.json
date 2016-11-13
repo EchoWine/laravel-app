@@ -1,0 +1,10 @@
+{
+    "name": "echowine/laravel-app",
+    "version": "master",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4" : {
+            "EchoWine\\Laravel\\App" : "src/"
+        }
+    }
+}

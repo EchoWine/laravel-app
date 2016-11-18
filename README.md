@@ -59,7 +59,7 @@ return view('Example::index');
     {
     	
         # Return only if it's a custom render
-        # The first handler with a return in method render will be used
+        # The first handler with a return in render method will be used
         # return parent::render($request, $exception);
         
     }

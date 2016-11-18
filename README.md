@@ -1,6 +1,6 @@
 # Laravel Multi Application
 
-A simple loader that permits to split the project in multiple parts or even create multiple application. All basic function of laravel will be automatically loaded: Commands, Resources/views, Resources/public, routes.php, Exceptions/Handler, Providers
+A simple loader that permits to split the project in multiple parts or even create multiple application. All the basic functions of laravel will be automatically loaded: Commands, Resources/views, Resources/public, routes, Exceptions/Handler, Providers
 
 ## Installation
 

@@ -51,14 +51,14 @@ return view('Example::index');
 
     public function report(Exception $exception)
     {
-        # Report only if is a custom report
+        # Report only if it's a custom report
         # echo "A custom report";
     }
     
     public function render($request, Exception $exception)
     {
     	
-        # Return only if is a custom render
+        # Return only if it's a custom render
         # The first handler with a return in method render will be used
         # return parent::render($request, $exception);
         

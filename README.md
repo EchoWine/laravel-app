@@ -1,6 +1,6 @@
 # Laravel Multi Application
 
-A simple loader that permits to split the project in multiple parts or even create multiple application
+A simple loader that permits to split the project in multiple parts or even create multiple application.
 
 ## Installation
 
@@ -24,7 +24,13 @@ A simple loader that permits to split the project in multiple parts or even crea
 EchoWine\Laravel\App\AppServiceProvider::class,
 ```
 
-- Create a new src package folder `php artisan src:new Example` at the root of your project.
+- Replace "HandlerException in app/Exceptions/Handler"
+
+```php
+use EchoWine\Laravel\App\Exceptions\Handler as ExceptionHandler;
+```
+
+- Create a new src package folder `php artisan src:generate Example` at the root of your project.
 
 
 ## Usage

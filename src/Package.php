@@ -37,7 +37,7 @@ class Package{
         $this -> base_path = $base_path;
         $this -> name = $name;
     }
-
+    
 
     public function getServiceProvider(){
         return $this -> service_provider;
@@ -85,6 +85,11 @@ class Package{
 
         $this -> loadFiles('Console/Commands/*','Console\\Commands\\',function($files,$classes){
             $this -> getServiceProvider() -> commands($classes);
+        });
+
+
+        $this -> loadFile('Exceptions/Handler.php','Exceptions\\',function($file,$class){
+            $this -> getServiceProvider() -> addExceptionsHandler($class);
         });
 
     }

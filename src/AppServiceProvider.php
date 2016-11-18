@@ -16,6 +16,13 @@ class AppServiceProvider extends ServiceProvider{
     public $app;
 
     /**
+     * List of all exceptions handlers
+     *
+     * @var Array
+     */
+    public $exceptions_handlers = [];
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -27,8 +34,25 @@ class AppServiceProvider extends ServiceProvider{
         $this -> commands([Commands\Generate::class]);
 
         $this -> loadPackages();
+
+        $this -> app -> bind('exceptions_handlers',function(){
+            return $this -> exceptions_handlers;
+        });
+
     }
     
+    /**
+     * Add a new exception handler
+     *
+     * @param string $class
+     *
+     * @return void
+     */
+    public function addExceptionsHandler($class){
+
+        $this -> exceptions_handlers[] = new $class($this -> app);
+    }
+
     /**
      * Bootstrap any application services.
      *

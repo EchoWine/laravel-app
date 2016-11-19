@@ -3,9 +3,9 @@
 namespace EchoWine\Laravel\App\Exceptions;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as BaseHandler;
 
-class Handler extends ExceptionHandler{
+class Handler extends BaseHandler{
 
 	public static $handlers = [];
 

@@ -8,7 +8,7 @@ A simple loader that permits to split the project in multiple parts or even crea
 ```json
 {
     "require": {
-        "echowine/laravel-app": "*"
+        "echowine/laravel-app": "*@dev"
     },
     "autoload": {
         "psr-4": {
@@ -23,7 +23,7 @@ A simple loader that permits to split the project in multiple parts or even crea
 EchoWine\Laravel\App\AppServiceProvider::class,
 ```
 
-- Replace "HandlerException in app/Exceptions/Handler"
+- Replace "HandlerException in app/Exceptions/Handler" (Only laravel 5.3 +)
 
 ```php
 use EchoWine\Laravel\App\Exceptions\Handler as ExceptionHandler;
@@ -45,7 +45,7 @@ return view('Example::index');
 {{asset('src/Example/assets/welcome/main.css')}}
 ```
 
-### Exception Handler
+### Exception Handler (Only laravel 5.3 +)
 
 ```php
 

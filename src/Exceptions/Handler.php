@@ -55,6 +55,10 @@ class Handler extends BaseHandler{
      * @return Array
      */
     public function getHandlers(){
-    	return $this -> container -> make('exceptions_handlers');
+        try{
+            return $this -> container -> make('exceptions_handlers');
+        }catch(\Exception $e){
+            return [];
+        }
     }
 }

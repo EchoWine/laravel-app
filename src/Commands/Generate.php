@@ -90,9 +90,11 @@ class Generate extends Command{
             'NAME' => strtolower($name)
         ]);
 
-        $gn -> put("$v/Exceptions/Handler.php","Exceptions/Handler.php",[
-            'NAMESPACE' => $name
-        ]);
+        if($v != "5.1/"){
+            $gn -> put("$v/Exceptions/Handler.php","Exceptions/Handler.php",[
+                'NAMESPACE' => $name
+            ]);
+        }
 
 
         $this -> info("\n".$name." generated");

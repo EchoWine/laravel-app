@@ -53,39 +53,44 @@ class Generate extends Command{
             $this -> error($e -> getMessage());
         }
 
-        $gn -> put("routes.php","routes.php",[
+        $v = $this -> laravel -> make('src.version')."/";
+
+        $gn -> put("$v/routes.php","routes.php",[
             'URL' => strtolower($name)
         ]);
 
-        $gn -> put("Package.php","Package.php",[
+        $gn -> put("$v/Package.php","Package.php",[
             'NAMESPACE' => $name
         ]);
 
-        $gn -> put("Resources/views/welcome.blade.php","Resources/views/welcome.blade.php");
-        $gn -> put("Resources/public/assets/welcome/main.css","Resources/public/assets/welcome/main.css");
-
-        $gn -> put("Providers/AppServiceProvider.php","Providers/AppServiceProvider.php",[
+        $gn -> put("$v/Resources/views/welcome.blade.php","Resources/views/welcome.blade.php",[
             'NAMESPACE' => $name
         ]);
 
-        $gn -> put("Providers/RouteServiceProvider.php","Providers/RouteServiceProvider.php",[
+        $gn -> put("$v/Resources/public/assets/welcome/main.css","Resources/public/assets/welcome/main.css");
+
+        $gn -> put("$v/Providers/AppServiceProvider.php","Providers/AppServiceProvider.php",[
             'NAMESPACE' => $name
         ]);
 
-        $gn -> put("Http/Controllers/Controller.php","Http/Controllers/Controller.php",[
+        $gn -> put("$v/Providers/RouteServiceProvider.php","Providers/RouteServiceProvider.php",[
             'NAMESPACE' => $name
         ]);
 
-        $gn -> put("Http/Controllers/WelcomeController.php","Http/Controllers/WelcomeController.php",[
+        $gn -> put("$v/Http/Controllers/Controller.php","Http/Controllers/Controller.php",[
             'NAMESPACE' => $name
         ]);
 
-        $gn -> put("Console/Commands/Welcome.php","Console/Commands/Welcome.php",[
+        $gn -> put("$v/Http/Controllers/WelcomeController.php","Http/Controllers/WelcomeController.php",[
+            'NAMESPACE' => $name
+        ]);
+
+        $gn -> put("$v/Console/Commands/Welcome.php","Console/Commands/Welcome.php",[
             'NAMESPACE' => $name,
             'NAME' => strtolower($name)
         ]);
 
-        $gn -> put("Exceptions/Handler.php","Exceptions/Handler.php",[
+        $gn -> put("$v/Exceptions/Handler.php","Exceptions/Handler.php",[
             'NAMESPACE' => $name
         ]);
 

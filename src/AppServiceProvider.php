@@ -23,6 +23,20 @@ class AppServiceProvider extends ServiceProvider{
     public $exceptions_handlers = [];
 
     /**
+     * List of all version accepted
+     *
+     * @var Array
+     */
+    public $versions = ['5.1','5.3'];
+
+    /**
+     * Current version
+     *
+     * @var Array
+     */
+    public $version = ['5.1','5.3'];
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -34,6 +48,20 @@ class AppServiceProvider extends ServiceProvider{
         $this -> commands([Commands\Generate::class]);
 
         $this -> loadPackages();
+
+        $v = explode(".",$this -> app -> version());
+        $v = $v[0].".".$v[1];
+
+        if(!in_array($v,$this -> versions))
+            throw new \Exception("Version {$this -> app -> version()} not supported");
+
+        $this -> version = $v;
+
+        $this -> app -> bind('src.version',function(){
+            return $this -> version;
+        });
+
+
 
         $this -> app -> bind('exceptions_handlers',function(){
             return $this -> exceptions_handlers;

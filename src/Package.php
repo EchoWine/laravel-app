@@ -32,14 +32,16 @@ class Package{
      *
      * @return this
      */
-    public function __construct($service_provider,$base_path,$name){
+    public function __construct($service_provider, $base_path, $name)
+    {
         $this -> service_provider = $service_provider;
         $this -> base_path = $base_path;
         $this -> name = $name;
     }
     
 
-    public function getServiceProvider(){
+    public function getServiceProvider()
+    {
         return $this -> service_provider;
     }
 
@@ -48,7 +50,8 @@ class Package{
      *
      * @return void
      */
-    public function boot(){
+    public function boot()
+    {
 
         $this -> load();
     }
@@ -58,7 +61,8 @@ class Package{
      *
      * @return void
      */
-    public function register(){
+    public function register()
+    {
 
     }
     
@@ -77,7 +81,8 @@ class Package{
      *
      * @return void
      */
-    public function loadServices(){
+    public function loadServices()
+    {
 
         $this -> loadFile('Providers/*','Providers\\',function($file,$class){
             $this -> getServiceProvider() -> app -> register($class);
@@ -104,7 +109,8 @@ class Package{
      *
      * @return void
      */
-    public function loadFile($directory,$namespace,$closure){
+    public function loadFile($directory, $namespace, $closure)
+    {
 
         $files = $this -> getFiles($directory);
         $files -> map(function($file) use($closure,$namespace){
@@ -122,7 +128,8 @@ class Package{
      *
      * @return void
      */
-    public function loadFiles($directory,$namespace,$closure){
+    public function loadFiles($directory,$namespace,$closure)
+    {
 
         $files = [];
         $classes = [];
@@ -142,7 +149,8 @@ class Package{
      *
      * @return void
      */
-    public function loadResources(){
+    public function loadResources()
+    {
         $this -> loadViews();
         $this -> loadPublic();
     }
@@ -152,7 +160,8 @@ class Package{
      *
      * @return void
      */
-    public function loadViews(){
+    public function loadViews()
+    {
 
         $package = $this -> base_path."/Resources/views";
 
@@ -165,7 +174,8 @@ class Package{
      *
      * @return void
      */
-    public function loadPublic(){
+    public function loadPublic()
+    {
 
         $directory = base_path("public/src");
 
@@ -187,7 +197,8 @@ class Package{
      *
      * @return void
      */
-    public function createLink($from,$to){
+    public function createLink($from,$to)
+    {
 
         if(File::exists($from)){
             if(!File::exists($to)){
@@ -207,7 +218,8 @@ class Package{
      *
      * @return string
      */
-    public function getClassByBasename($basename,$namespace = ''){
+    public function getClassByBasename($basename,$namespace = '')
+    {
         $file = basename($basename,".php");
         $class = "\\".$this -> name."\\".$namespace.$file;
         return $class;
@@ -218,7 +230,8 @@ class Package{
      *
      * @return collection
      */
-    public function getFiles($directory){
+    public function getFiles($directory)
+    {
         return collect(File::glob($this -> base_path."/{$directory}"));
     }
 

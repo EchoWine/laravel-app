@@ -6,7 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use EchoWine\Laravel\App\Commands as Commands;
 use File;
 
-class AppServiceProvider extends ServiceProvider{
+class AppServiceProvider extends ServiceProvider
+{
 
     /**
      * The application instance.
@@ -27,44 +28,45 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @var Array
      */
-    public $versions = ['5.1','5.3'];
+    public $versions = ['5.1','5.3','5.4'];
 
     /**
      * Current version
      *
      * @var Array
      */
-    public $version = ['5.1','5.3'];
+    public $version = ['5.1','5.3','5.4'];
 
     /**
      * Register the service provider.
      *
      * @return void
      */
-    public function register(){
+    public function register()
+    {
 
-        $this -> makePath();
+        $this->makePath();
 
-        $this -> commands([Commands\Generate::class]);
+        $this->commands([Commands\Generate::class]);
 
-        $this -> loadPackages();
+        $this->loadPackages();
 
-        $v = explode(".",$this -> app -> version());
+        $v = explode(".",$this->app->version());
         $v = $v[0].".".$v[1];
 
-        if(!in_array($v,$this -> versions))
-            throw new \Exception("Version {$this -> app -> version()} not supported");
+        if(!in_array($v,$this->versions))
+            throw new \Exception("Version {$this->app->version()} not supported");
 
-        $this -> version = $v;
+        $this->version = $v;
 
-        $this -> app -> bind('src.version',function(){
-            return $this -> version;
+        $this->app->bind('src.version',function() {
+            return $this->version;
         });
 
 
 
-        $this -> app -> bind('exceptions_handlers',function(){
-            return $this -> exceptions_handlers;
+        $this->app->bind('exceptions_handlers',function() {
+            return $this->exceptions_handlers;
         });
 
     }
@@ -76,9 +78,10 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @return void
      */
-    public function addExceptionsHandler($class){
+    public function addExceptionsHandler($class)
+    {
 
-        $this -> exceptions_handlers[] = new $class($this -> app);
+        $this->exceptions_handlers[] = new $class($this->app);
     }
 
     /**
@@ -86,7 +89,8 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @return void
      */
-    public function boot(){
+    public function boot()
+    {
 
 
     }
@@ -96,7 +100,8 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @return array
      */
-    public function provides(){
+    public function provides()
+    {
         return [];
     }
 
@@ -105,7 +110,8 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @return void
      */
-    public function makePath(){
+    public function makePath()
+    {
         $path = base_path('src');
 
         if(!File::exists($path))
@@ -117,7 +123,8 @@ class AppServiceProvider extends ServiceProvider{
      *
      * @return void
      */
-    public function loadPackages(){
+    public function loadPackages()
+    {
         $path = base_path('src');
         
         $packages = collect();
@@ -132,15 +139,15 @@ class AppServiceProvider extends ServiceProvider{
             if(File::exists($file)){
                 require $file;
                 $class = new $class($this,$directory,$name);
-                $class -> boot();
+                $class->boot();
 
                 $packages[] = $class;
             }
         }
 
 
-        $packages -> map(function($package){
-            $package -> register();
+        $packages->map(function($package){
+            $package->register();
         });
 
 

@@ -1,17 +1,11 @@
 <?php
 
-namespace EchoWine\Laravel\App\Exceptions;
+namespace $NAMESPACE$\Exceptions;
 
+use EchoWine\Laravel\App\Exceptions\ExceptionHandler;
 use Exception;
 
-class ExceptionHandler{
-
-    public $app;
-
-    public function __construct($app)
-    {
-        $this->app = $app;
-    }
+class Handler extends ExceptionHandler{
 
     /**
      * Report or log an exception.
@@ -23,7 +17,7 @@ class ExceptionHandler{
      */
     public function report(Exception $exception)
     {
-    	
+
     }
 
     /**
@@ -35,6 +29,9 @@ class ExceptionHandler{
      */
     public function render($request, Exception $exception)
     {
-
+    	
+        # Return only if render is different
+        // return parent::render($request, $exception);
     }
+
 }

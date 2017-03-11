@@ -39,7 +39,7 @@ class Handler extends BaseHandler{
     {
 
 
-    	foreach($this -> getHandlers() as $handler){
+    	foreach($this -> getHandlers() as $handler) {
     		
     		if($return = $handler -> render($request,$exception))
     			return $return;
@@ -54,10 +54,11 @@ class Handler extends BaseHandler{
      *
      * @return Array
      */
-    public function getHandlers(){
-        try{
+    public function getHandlers()
+    {
+        try {
             return $this -> container -> make('exceptions_handlers');
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             return [];
         }
     }

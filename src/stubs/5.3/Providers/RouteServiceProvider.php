@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this -> mapRoutes();
+        $this->mapRoutes();
 
     }
     
@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
         
         Route::group([
             'middleware' => 'web',
-            'namespace' => $this -> namespace,
+            'namespace' => $this->namespace,
         ],function ($router){
             require base_path("src/$NAMESPACE$/routes.php");
         });

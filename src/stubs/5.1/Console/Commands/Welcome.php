@@ -44,6 +44,6 @@ class Welcome extends Command
      */
     public function handle()
     {
-        $this -> info("Live little man!!!");
+        $this->info("Live little man!!!");
     }
 }

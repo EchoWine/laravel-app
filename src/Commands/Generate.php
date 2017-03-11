@@ -55,7 +55,7 @@ class Generate extends Command{
 
         $v = $this->laravel->make('src.version')."/";
 
-        $gn->put("$v/routes.php","routes.php",[
+        $gn->put("$v/Http/routes.php","Http/routes.php",[
             'URL' => strtolower($name)
         ]);
 
